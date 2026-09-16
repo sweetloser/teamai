@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bugly 异常同步钉钉"
+  short_description: "读取 Bugly 详情，增量去重后同步钉钉并标记已统计"
+  default_prompt: "使用 $bugly-dingtalk-sync 同步声学项目近 7 天 Bugly 异常到钉钉 Bug记录表。"

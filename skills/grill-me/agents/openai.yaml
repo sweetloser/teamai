@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "通过连续深入追问，对产品方案、技术设计和关键决策进行系统压力测试"
+  default_prompt: "Use $grill-me to challenge my plan one decision at a time until all important ambiguities are resolved."

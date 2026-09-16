@@ -1,0 +1,7 @@
+interface:
+  display_name: "Swift Code Organizer"
+  short_description: "用中文注释、中文 MARK 和主类型优先顺序整理 Swift"
+  default_prompt: "使用 $swift-code-organizer 整理 Swift/SwiftUI 代码，采用中文注释和中文 MARK，将文件辅助类型移到主类型及其扩展之后，并保持行为和 API 不变。"
+
+policy:
+  allow_implicit_invocation: true
