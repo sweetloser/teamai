@@ -1,0 +1,100 @@
+{
+  "skill_name": "swift-code-organizer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "帮我整理 Sources/Checkout/CheckoutViewModel.swift：减少嵌套和重复，把属性和方法按功能职责分区并使用 MARK 标记，把协议实现按职责放到 extension，但不要改行为、公开 API 或现有错误提示。请遵循仓库里的 SwiftLint/SwiftFormat 配置并跑相关测试。",
+      "expected_output": "Focused edits confined to the requested Swift file, with behavior/API preserved, safe extension handling, project-configured formatting, and targeted verification.",
+      "files": [
+        "evals/files/checkout/Package.swift",
+        "evals/files/checkout/.swiftformat",
+        "evals/files/checkout/Sources/Checkout/CheckoutViewModel.swift",
+        "evals/files/checkout/Tests/CheckoutTests/CheckoutViewModelTests.swift"
+      ],
+      "expectations": [
+        "Only CheckoutViewModel.swift changes; Package.swift, .swiftformat, and the test file remain byte-for-byte unchanged",
+        "The public submit(items:) signature and the exact emptyCart and invalidQuantity error strings remain unchanged",
+        "Every added or edited human-readable comment and every // MARK: - title uses Simplified Chinese; the conformance section may retain the exact CheckoutSubmitting identifier but includes a Chinese description",
+        "The touched type uses concise functional sections such as `// MARK: - 初始化`, `// MARK: - 提交`, and `// MARK: - CheckoutSubmitting 协议实现`; swift test passes and SwiftFormat uses the supplied project configuration",
+        "CheckoutViewModel and its CheckoutSubmitting conformance extension appear before a final `// MARK: - 辅助类型` section containing CheckoutSubmitting, CheckoutItem, and CheckoutError in their original relative order"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "这个 SwiftUI ProfileView.swift 太乱了，帮我拆一下 body、按功能职责使用 MARK 整理属性和方法、改善命名和 modifier，但 UI、动画、@StateObject 生命周期、ForEach identity 和 .task(id:) 行为必须完全一样。",
+      "expected_output": "A readable SwiftUI refactor that explicitly protects view identity, property-wrapper ownership, modifier ordering, tasks, animation, and rendered behavior.",
+      "files": [
+        "evals/files/profile/ProfileView.swift"
+      ],
+      "expectations": [
+        "The @StateObject declaration, ForEach id, and .task(id:) expression remain textually present and semantically unchanged",
+        "The order of padding, background, clipShape, and accessibility modifiers remains unchanged",
+        "The result introduces neither AnyView nor a property-wrapper substitution, and uses concise Simplified-Chinese functional // MARK: - sections without reordering lifecycle-sensitive declarations",
+        "Every added or edited human-readable comment and every MARK title uses Simplified Chinese; exact Swift identifiers remain unchanged",
+        "The filename-matching ProfileView is the primary type and appears before a final `// MARK: - 辅助类型` section containing ProfileModel; the @MainActor attribute remains attached to ProfileModel"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Review the cleanup opportunities in NetworkClient.swift. It uses actors, async let, cancellation handlers, weak captures and @objc callbacks. Suggestions only—do not edit anything.",
+      "expected_output": "A read-only review that distinguishes safe readability improvements from risky concurrency, lifetime, and Objective-C changes.",
+      "files": [
+        "evals/files/network/NetworkClient.swift"
+      ],
+      "expectations": [
+        "NetworkClient.swift remains byte-for-byte unchanged",
+        "The review explicitly protects actor isolation, async-let ordering, cancellation handlers, weak captures, and Objective-C callback semantics",
+        "The review labels uncertain concurrency or lifetime transformations as risky instead of presenting them as safe cleanup"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "请使用 swift-code-organizer 整理 Sources/LazyPropertyExample/ProfilePresenter.swift。目标已经依赖并导入 UGCommonKit：请把适用的配置型 lazy 属性改成全局 with(...) 写法，并按功能职责使用 MARK 分区。必须保留 lazy 首次访问时机、显式类型、配置顺序、[weak self] 捕获、公开 API 和行为；不要改 Package.swift、UGCommonKit 实现或测试。完成后运行 swift test。",
+      "expected_output": "A focused organization that uses UGCommonKit's value-returning with helper for the eligible configured lazy property while preserving lazy initialization, capture and configuration semantics, API, and dependencies.",
+      "files": [
+        "evals/files/lazy-property/Package.swift",
+        "evals/files/lazy-property/Sources/UGCommonKit/With.swift",
+        "evals/files/lazy-property/Sources/LazyPropertyExample/ProfilePresenter.swift",
+        "evals/files/lazy-property/Tests/LazyPropertyExampleTests/ProfilePresenterTests.swift"
+      ],
+      "expectations": [
+        "Only ProfilePresenter.swift changes; Package.swift, With.swift, and ProfilePresenterTests.swift remain byte-for-byte unchanged",
+        "The formatter declaration remains `private lazy var formatter: TextFormatter`, uses `with(TextFormatter())`, removes only the outer `return formatter` and trailing `}()`, and preserves both return statements inside the nested transform closure",
+        "The result preserves the order `formatterCreationCount += 1`, prefix assignment, then transform assignment; preserves `[weak self]` on the nested transform; does not use `with(&...)`; and does not add or change any package dependency",
+        "ProfilePresenter contains `// MARK: - 状态`, `// MARK: - 初始化`, and `// MARK: - 格式化`; no English-only MARK title remains; the stored-property order remains suffix, formatterCreationCount, formatter; and no public or internal signature changes",
+        "swift test passes both first-access assertions and the test proving a retained transform does not retain ProfilePresenter and uses its fallback after the presenter deallocates",
+        "The filename-matching ProfilePresenter appears first and TextFormatter appears under a final `// MARK: - 辅助类型` section; every TextFormatter member and access level remains unchanged"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "请使用 swift-code-organizer 整理 CommentLanguageExample.swift，改善分区和可读性但不要改变任何 API 或行为。保留注释表达的并发与回调顺序约束、SwiftLint 指令、TODO 标记和协议名，然后使用 swiftc -typecheck 验证。",
+      "expected_output": "A behavior-preserving organization whose human-readable comments and MARK titles use Simplified Chinese while exact machine directives, tags, and code identifiers remain intact.",
+      "files": [
+        "evals/files/comments/CommentLanguageExample.swift"
+      ],
+      "expectations": [
+        "Every retained or rewritten explanatory `//` or `///` prose comment contains Simplified Chinese and the English prose about stale callbacks, publication ordering, and the legacy callback API is gone without losing its meaning",
+        "Every MARK title contains Simplified Chinese; English-only `// MARK: - State`, `// MARK: - Actions`, and `// MARK: - CompletionNotifying` are absent",
+        "The exact `// swiftlint:disable:next identifier_name` directive, `TODO:` tag, CompletionNotifying identifier, public/internal signatures, statement order, and callback invocation order remain unchanged",
+        "The protocol conformance MARK retains `CompletionNotifying` and adds a Chinese description such as `协议实现`, and `swiftc -typecheck CommentLanguageExample.swift` succeeds",
+        "UploadCoordinator is treated as the single dominant primary type; its CompletionNotifying extension appears before a final `// MARK: - 辅助类型` section containing the CompletionNotifying protocol"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "请使用 swift-code-organizer 整理 FileTypeOrderExample.swift。以与文件同名的 FileTypeOrderExample 为主类型，把同文件的非主辅助类型及其扩展放到文件末尾，使用中文注释和中文 MARK；不要把嵌套类型移出主类型，也不要改变 API、类型成员、声明内容或运行行为。完成后运行 swiftc -typecheck。",
+      "expected_output": "A behavior-preserving file layout with the filename-matching primary type and its extensions first, followed by a Chinese helper-type section containing auxiliary top-level types and their extensions in stable order.",
+      "files": [
+        "evals/files/file-type-order/FileTypeOrderExample.swift"
+      ],
+      "expectations": [
+        "The top-level FileTypeOrderExample declaration appears before its CustomStringConvertible extension, and both appear before the top-level RenderMode and NameFormatter declarations",
+        "A `// MARK: - 辅助类型` section appears after all FileTypeOrderExample declarations; the auxiliary top-level order remains RenderMode then NameFormatter then the NameFormatter extension",
+        "The nested FileTypeOrderExample.Cache type remains nested inside FileTypeOrderExample and is not moved to file scope",
+        "Every added or edited human-readable comment and MARK title uses Simplified Chinese, while the exact CustomStringConvertible and CustomDebugStringConvertible identifiers remain unchanged",
+        "No signatures, access levels, attributes, method bodies, string literals, or declaration contents change apart from relocation and comments, and `swiftc -typecheck FileTypeOrderExample.swift` succeeds"
+      ]
+    }
+  ]
+}

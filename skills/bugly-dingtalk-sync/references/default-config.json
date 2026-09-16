@@ -1,0 +1,33 @@
+{
+  "app": {
+    "name": "声学",
+    "optionId": "a5fAUeTCCz"
+  },
+  "timeRange": "近 7 天",
+  "tagName": "已统计",
+  "bugly": {
+    "projectName": "UgreenAudio",
+    "projectId": "e5ad56c746",
+    "platform": "iOS",
+    "pid": "2",
+    "listUrl": "https://bugly.qq.com/v2/crash-reporting/crashes/e5ad56c746?pid=2",
+    "detailUrlTemplate": "https://bugly.qq.com/v2/crash-reporting/crashes/e5ad56c746/{issueId}?pid=2"
+  },
+  "dingtalk": {
+    "url": "https://alidocs.dingtalk.com/i/nodes/N7dx2rn0JbZme0pNu2grGraqJMGjLRb3",
+    "baseId": "N7dx2rn0JbZme0pNu2grGraqJMGjLRb3",
+    "tableId": "qTOlnIY",
+    "tableName": "Bug记录",
+    "fields": {
+      "title": "BjVQGwK",
+      "description": "L7Y3UOJ",
+      "relatedLink": "JDsQA1r",
+      "app": "8RZ3PMo",
+      "version": "qDnlPVH",
+      "occurrenceCount": "QRPV5dM",
+      "deviceCount": "igNXdyj",
+      "systemVersion": "p6vHdlv",
+      "deviceModel": "0gAvh6P"
+    }
+  }
+}
